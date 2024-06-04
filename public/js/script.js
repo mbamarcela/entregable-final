@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", function() {
     let body = "";
     for (var i = 0; i < data.length; i++) {
       body += `<tr>
-        <td>${data[i].id_Usuario}</td>
-        <td>${data[i].nombre}</td>
-        <td>${data[i].correo}</td>
+        <td>${data.rows[i].id_usuario}</td>
+        <td>${data.rows[i].nombre}</td>
+        <td>${data.rows[i].correo}</td>
         </tr>`;
     }
     document.getElementById('data').innerHTML = body;

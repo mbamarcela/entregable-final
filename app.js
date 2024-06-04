@@ -136,6 +136,7 @@ app.get('/CRUDRepo/ConsultarUsuarios', (req, res) => {
             res.status(500).json({ error: 'Error interno del servidor' });
             return;
         }
+        console.log("results completo postgresql: " , results);
         res.json(results);
     });
 });
