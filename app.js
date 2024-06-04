@@ -56,7 +56,7 @@ app.get('/login', (req, res) => {
 
 app.post('/login', (req, res) => {        
     const { email, password } = req.body;
-    const query = 'SELECT * FROM usuario WHERE correo = ?';
+    const query = 'SELECT * FROM usuario WHERE correo = $1';
     pool.query(query, [email], (err, result) => {
         if (err) {
             throw err;
