@@ -64,6 +64,8 @@ app.post('/login', (req, res) => {
 
         console.log("Resultado normal: " , result[0]);
         console.log("result postgresql: ",result);
+        console.log("result postgresql usuario: ",result.rows[0].correo);
+        console.log("result postgresql clave: ",result.rows[0].clave);
 
         if (result.length > 0) {
             const hashedPassword = result[0].clave;
