@@ -115,6 +115,10 @@ app.get('/indexAlex', (req, res) => {
     res.sendFile(path.join(__dirname, 'indexAlex.html'));
 });
 
+app.get('/indexAdmin', (req, res) => {    
+    res.sendFile(path.join(__dirname, 'indexAdmin.html'));
+});
+
 app.get('/logout', (req, res) => {
     res.redirect('/login.html');
 });
