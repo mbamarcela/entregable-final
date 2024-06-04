@@ -81,8 +81,8 @@ app.post('/signup', (req, res) => {
     
     const { name, email, password } = req.body;
     const saltRounds = 10;
-    const inserUserQuery = 'INSERT INTO usuario (nombre, correo, clave) VALUES (?, ?, ?)';
-    const checkUsernameQuery = 'SELECT * FROM usuario WHERE correo = ?';
+    const inserUserQuery = 'INSERT INTO usuario (nombre, correo, clave) VALUES ($1, $2, $3)';
+    const checkUsernameQuery = 'SELECT * FROM usuario WHERE correo = $1';
 
     pool.query(checkUsernameQuery, [email], (err, result) => {
         if (err) {
