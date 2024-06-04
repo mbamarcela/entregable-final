@@ -137,7 +137,7 @@ app.get('/CRUDRepo/ConsultarUsuarios', (req, res) => {
 });
 
 // Ruta para agregar una nueva persona
-app.post('/CRUDRepo/AgregarUsuario', (req, res) => {
+app.post('entregable-final/CRUDRepo/AgregarUsuario', (req, res) => {
     const { nombre,  correo, clave} = req.body;
     console.log("llegando a crear usuario");
     pool.query('INSERT INTO usuario (nombre, correo, clave ) VALUES (?, ?, ?)', [nombre, correo, clave],(err, results) => {
