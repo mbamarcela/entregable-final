@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     .catch(error => console.log(error));
 
   function mostrarData(data) {
+    console.log("Data: " , data);
     let body = "";
     for (var i = 0; i < data.length; i++) {
       body += `<tr>
