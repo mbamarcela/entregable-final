@@ -14,7 +14,7 @@ $(document).ready(function() {
         console.log("Enviando info");
         // Realiza una solicitud AJAX al servidor para registrar un nuevo usuario       
         $.ajax({
-            url: 'https://entregable-final-8oa3.onrender.com/entregable-final/signup', //SE CAMBIO EL ('/register)
+            url: 'https://entregable-final-8oa3.onrender.com/signup', //SE CAMBIO EL ('/register)
             type: 'POST',
             data: { name: name, email: email, password: password }, 
             //SE CAMBIO EN LA LINEA 19 LOS CAMPOS USERNAME POR (EMAIL)---------------------------------------
@@ -50,6 +50,7 @@ $(document).ready(function() {
         let email = $('#email').val(); //SE CAMBIO EL USERNAME POR (email)
         let password = $('#password').val();
 
+        console.log("Enviando info de logueo");
         // Realiza una solicitud POST al servidor con los datos de inicio de sesión
         $.post('https://entregable-final-8oa3.onrender.com/login', {email: email, password: password}, function(response) {
             //SE CAMBIO EN LA LINEA 55 EL USERNAME POR (email)

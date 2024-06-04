@@ -77,6 +77,8 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/signup', (req, res) => {
+    console.log("Entrando a /signup");
+    
     const { name, email, password } = req.body;
     const saltRounds = 10;
     const inserUserQuery = 'INSERT INTO usuario (nombre, correo, clave) VALUES (?, ?, ?)';
