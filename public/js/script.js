@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function mostrarData(data) {
     console.log("Data: " , data);
     let body = "";
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < data.rows.length; i++) {
       body += `<tr>
         <td>${data.rows[i].id_usuario}</td>
         <td>${data.rows[i].nombre}</td>
