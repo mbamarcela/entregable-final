@@ -62,13 +62,8 @@ app.post('/login', (req, res) => {
             throw err;
         }
 
-        console.log("Resultado normal: " , result[0]);
-        console.log("result postgresql: ",result);
-        console.log("result postgresql usuario: ",result.rows[0].correo);
-        console.log("result postgresql clave: ",result.rows[0].clave);
-
-        if (result.length > 0) {
-            const hashedPassword = result[0].clave;
+        if (result.rows.length > 0) {
+            const hashedPassword = result.rows[0].clave;
             
             bcrypt.compare(password, hashedPassword, (err, bcryptResult) => {
                 if (bcryptResult) {
@@ -95,7 +90,7 @@ app.post('/signup', (req, res) => {
         if (err) {
             throw err;
         }
-        if (result.length > 0) {
+        if (result.rows.length > 0) {
             return res.status(400).json({ error: 'El nombre de usuario ya está en uso' });
         }
         bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
@@ -149,7 +144,7 @@ app.get('/CRUDRepo/ConsultarUsuarios', (req, res) => {
 app.post('/CRUDRepo/AgregarUsuario', (req, res) => {
     const { nombre,  correo, clave} = req.body;
     console.log("llegando a crear usuario");
-    pool.query('INSERT INTO usuario (nombre, correo, clave ) VALUES (?, ?, ?)', [nombre, correo, clave],(err, results) => {
+    pool.query('INSERT INTO usuario (nombre, correo, clave ) VALUES ($1, $2, $3)', [nombre, correo, clave],(err, results) => {
       if (err) {
         console.error('Error al agregar el usuario:', err);
         res.status(500).json({ error: 'Error interno del servidor' });
@@ -166,7 +161,7 @@ app.put('/CRUDRepo/ActualizarUsuario/:id_Usuario', (req, res) => {
     console.log("Id_Usuario: " + id_Usuario );
     console.log("nombre: " + nombre );
     console.log("correo: " + correo );
-    pool.query('UPDATE usuario SET nombre = ?, correo = ? WHERE id_Usuario = ?', [nombre, correo, id_Usuario], (err, results) => {
+    pool.query('UPDATE usuario SET nombre = $1, correo = $2 WHERE id_Usuario = $3', [nombre, correo, id_Usuario], (err, results) => {
         if (err) {
             console.error('Error al actualizar el usuario:', err);
             res.status(500).json({ error: 'Error interno del servidor' });
@@ -178,7 +173,7 @@ app.put('/CRUDRepo/ActualizarUsuario/:id_Usuario', (req, res) => {
 
 app.delete('/CRUDRepo/EliminarUsuario/:id_Usuario', (req, res) => {
     const { id_Usuario } = req.params;
-    pool.query('DELETE FROM usuario WHERE id_Usuario = ?', [id_Usuario], (err, results) => {
+    pool.query('DELETE FROM usuario WHERE id_Usuario = $1', [id_Usuario], (err, results) => {
         if (err) {
             console.error('Error al eliminar el usuario:', err);
             res.status(500).json({ error: 'Error interno del servidor' });
