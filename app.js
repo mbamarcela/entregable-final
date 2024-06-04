@@ -61,8 +61,13 @@ app.post('/login', (req, res) => {
         if (err) {
             throw err;
         }
+
+        console.log("Resultado normal: " , result[0]);
+        console.log("result postgresql: ",result);
+
         if (result.length > 0) {
             const hashedPassword = result[0].clave;
+            
             bcrypt.compare(password, hashedPassword, (err, bcryptResult) => {
                 if (bcryptResult) {
                     res.json({ exists: true });
