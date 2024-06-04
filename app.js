@@ -20,7 +20,7 @@ app.use(cors());
 const port = 3000;
 
 app.listen(port, () => {
-    console.log(`Servidor escuchando en https://mbamarcela.github.io/entregable-final/:${port}`);
+    console.log(`Servidor escuchando en https://mbamarcela.github.io/:${port}`);
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -46,15 +46,15 @@ pool.connect((err) => {
 // Middleware para parsear JSON
 app.use(express.json());
 
-app.get('entregable-final/', (req, res) => {    
+app.get('/', (req, res) => {    
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('entregable-final/login', (req, res) => {    
+app.get('/login', (req, res) => {    
     res.sendFile(path.join(__dirname, 'login.html'));
 });
 
-app.post('entregable-final/login', (req, res) => {        
+app.post('/login', (req, res) => {        
     const { email, password } = req.body;
     const query = 'SELECT * FROM usuario WHERE correo = ?';
     pool.query(query, [email], (err, result) => {
@@ -76,7 +76,7 @@ app.post('entregable-final/login', (req, res) => {
     });
 });
 
-app.post('entregable-final/signup', (req, res) => {
+app.post('/signup', (req, res) => {
     const { name, email, password } = req.body;
     const saltRounds = 10;
     const inserUserQuery = 'INSERT INTO usuario (nombre, correo, clave) VALUES (?, ?, ?)';
@@ -103,15 +103,15 @@ app.post('entregable-final/signup', (req, res) => {
     });
 });
 
-app.get('entregable-final/signup', (req, res) => {    
+app.get('/signup', (req, res) => {    
     res.sendFile(path.join(__dirname, 'signup.html'));
 });
 
-app.get('entregable-final/indexAlex', (req, res) => {    
+app.get('/indexAlex', (req, res) => {    
     res.sendFile(path.join(__dirname, 'indexAlex.html'));
 });
 
-app.get('entregable-final/logout', (req, res) => {
+app.get('/logout', (req, res) => {
     res.redirect('/login.html');
 });
 
@@ -137,7 +137,7 @@ app.get('/CRUDRepo/ConsultarUsuarios', (req, res) => {
 });
 
 // Ruta para agregar una nueva persona
-app.post('entregable-final/CRUDRepo/AgregarUsuario', (req, res) => {
+app.post('/CRUDRepo/AgregarUsuario', (req, res) => {
     const { nombre,  correo, clave} = req.body;
     console.log("llegando a crear usuario");
     pool.query('INSERT INTO usuario (nombre, correo, clave ) VALUES (?, ?, ?)', [nombre, correo, clave],(err, results) => {
